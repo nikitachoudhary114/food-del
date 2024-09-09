@@ -67,7 +67,7 @@ const PlaceOrder = () => {
               onChange={onChangeHandler}
               value={data.lastName}
               type="text"
-              placeholder="last name"
+              placeholder="Last name"
               required
             />
           </div>

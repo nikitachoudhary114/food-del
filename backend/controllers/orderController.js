@@ -34,7 +34,7 @@ const placeOrder = async (req, res) => {
             price_data: {
                 currency: 'inr',
                 product_data: {
-                    name: 'delivery charges'
+                    name: 'Delivery charges'
                 },
                 unit_amount: 2*100*80
             },
@@ -47,7 +47,7 @@ const placeOrder = async (req, res) => {
             mode: 'payment',
             success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
             cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
-            
+           
         })
         res.json({success: true, session_url: session.url})
 
@@ -56,8 +56,39 @@ const placeOrder = async (req, res) => {
         res.json({success: false, message: "error"})
     }
 }
+// const verifyOrder = async (req, res) => {
+//     const { orderId, success } = req.body;
+//     try {
+//         if (success == "true") {
+//             await orderModel.findByIdAndUpdate(orderId, { payment: true });
+//             res.json({success: true, message: "Paid"})
+//         }
+//         else {
+//             await orderModel.findByIdAndDelete(orderId);
+//             res.json({success: false, message: "Not Paid"})
+//         }
+//     } catch (error) {
+//         console.log(error)
+//         res.json({success: false, message: "error"})
+//     }
+// }
 const verifyOrder = async (req, res) => {
-    
-}
+    const { orderId, success } = req.body;
+    try {
+        if (success === "true") {
+            // Update the payment status to true
+            await orderModel.findByIdAndUpdate(orderId, { payment: true });
+            res.json({ success: true, message: "Paid" });  // Fixed the typo here
+        } else {
+            // Delete the order if payment failed
+            await orderModel.findByIdAndDelete(orderId);
+            res.json({ success: false, message: "Not Paid" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error updating payment status" });
+    }
+};
+
 
 export {placeOrder, verifyOrder}
