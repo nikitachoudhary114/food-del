@@ -84,7 +84,20 @@ li {
 .nav-profile-dropdown li:hover{
     color: tomato;
 }
+.admin-btn {
+  background-color: #ff4c24;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 10px;
+}
 
+.admin-btn:hover {
+  opacity: 0.85;
+}
 @media (max-width: 1050px) {
   .navbar .logo {
     width: 140px;
