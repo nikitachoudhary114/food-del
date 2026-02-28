@@ -59,6 +59,15 @@ function Navbar({ setShowLogin }) {
           </Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
+        
+        <button
+    onClick={() =>
+      window.open("https://food-del-admin-wavw.onrender.com", "_blank")
+    }
+    className="admin-btn"
+  >
+    Admin
+  </button>
         {!token ? (
           <button onClick={() => setShowLogin(true)}>Sign in</button>
         ) : (
